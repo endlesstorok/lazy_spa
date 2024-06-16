@@ -53,7 +53,7 @@ while(1){
 		eval { getCurrentState()} ;
 	}	
 	LOGINF "I'm alive";
-	Time::HiRes::sleep(10);
+	Time::HiRes::sleep(5);
 }
 
 $mqtt->disconnect();
