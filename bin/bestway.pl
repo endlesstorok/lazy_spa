@@ -59,7 +59,7 @@ while(1){
 $mqtt->disconnect();
 
 sub getToken{
-	my $request = HTTP::Request->new(POST => 'https://euapi.gizwits.com/app/login');
+	my $request = HTTP::Request->new(POST => 'https://usapi.gizwits.com/app/login');
 	$request->header('Content-Type' => 'application/json');
 	$request->header('X-Gizwits-Application-Id' => '98754e684ec045528b073876c34c7348');
 	$request->content("{ \"username\": \"$cfg->{mail}\", \"password\": \"$cfg->{password}\", \"lang\": \"en\" }");
@@ -79,7 +79,7 @@ sub getToken{
 }
 
 sub getDeviceId{
-	my $request = HTTP::Request->new(GET => 'https://euapi.gizwits.com/app/bindings?limit=20&skip=0');
+	my $request = HTTP::Request->new(GET => 'https://usapi.gizwits.com/app/bindings?limit=20&skip=0');
 	$request->header('X-Gizwits-Application-Id' => '98754e684ec045528b073876c34c7348');
 	$request->header('X-Gizwits-User-token' => $cfg->{token});
 	
@@ -101,7 +101,7 @@ sub getDeviceId{
 }
 
 sub getCurrentState(){
-	my $request = HTTP::Request->new(GET => "https://euapi.gizwits.com/app/devdata/$cfg->{deviceId}/latest");
+	my $request = HTTP::Request->new(GET => "https://usapi.gizwits.com/app/devdata/$cfg->{deviceId}/latest");
 	$request->header('X-Gizwits-Application-Id' => '98754e684ec045528b073876c34c7348');
  	$request->header('X-Gizwits-User-token' => $cfg->{token});
 
@@ -138,7 +138,7 @@ sub received
 {
 	my ($topic, $message) = @_;
 	LOGINF "Incoming message on topic $topic is: $message\n";
-	my $request = HTTP::Request->new(POST => "https://euapi.gizwits.com/app/control/$cfg->{deviceId}");
+	my $request = HTTP::Request->new(POST => "https://usapi.gizwits.com/app/control/$cfg->{deviceId}");
 	$request->header('Content-Type' => 'application/json');
 	$request->header('X-Gizwits-Application-Id' => '98754e684ec045528b073876c34c7348');
 	$request->header('X-Gizwits-User-token' => $cfg->{token});
